@@ -17,6 +17,23 @@ app.get('/test2', (req, res) => {
     res.sendFile(__dirname + '/Client/client2.html');
 })
 
+app.get('/socket.io.js', (req, res, next) => {
+	return res.sendFile(__dirname + '/node_modules/socket.io-client/dist/socket.io.js');
+});
+
+io.use((socket, next) => {
+    var authParams = socket.handshake.query.id;
+    console.log(socket.handshake.query);
+    if(authParams == undefined){
+        console.log("Client couldn't connect");
+    }
+    var id = "12345";
+    if(authParams == id){
+        next()
+    }
+
+})
+
 io.on('connection', (socket) => {
     console.log("User is connected");
 

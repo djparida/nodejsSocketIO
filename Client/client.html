@@ -23,17 +23,9 @@
 
     </div>
 </body>
-<script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io.js"></script>
 <script>
-    const socket = io() 
-    $('#s_btn').click(function(){
-        const text = $("#sendText").val();
-        socket.emit('message', text);
-        $("#send").append(
-            "<p>"+ text +"</p>"
-        )
-    });
-
+    var socket = io({'query':{'id':'12345', 'username':"djParida", 'passwaord':'anything'}});
     socket.on('message', data => {
         $("#rcv").append(
             "<p>"+ data +"</p>"
